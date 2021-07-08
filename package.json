@@ -19,6 +19,8 @@
   "homepage": "https://github.com/JonWaaler/nosql-mongoose#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "moment": "^2.29.1",
+    "mongoose": "^5.13.2",
     "validator": "^13.6.0"
   }
 }

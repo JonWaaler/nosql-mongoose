@@ -3,6 +3,7 @@ const dateFormat = require("../utils/dateFormat");
 
 const ReactionSchema = new Schema(
   {
+    // set custom id to avoid confusion with parent comment _id
     reactionId: {
       type: Schema.Types.ObjectId,
       default: () => new Types.ObjectId(),
@@ -10,7 +11,9 @@ const ReactionSchema = new Schema(
     reactionBody: {
       type: String,
       required: true,
-      maxLength: 280,
+      trim: true,
+      minlength: 1,
+      maxlength: 280,
     },
     username: {
       type: String,
@@ -34,7 +37,8 @@ const ThoughtSchema = new Schema(
     thoughtText: {
       type: String,
       required: true,
-      maxLength: 280,
+      minlength: 1,
+      maxlength: 280,
     },
     createdAt: {
       type: Date,
@@ -44,6 +48,7 @@ const ThoughtSchema = new Schema(
     username: {
       type: String,
       required: true,
+      ref: "User",
     },
     reactions: [ReactionSchema],
   },
@@ -57,7 +62,7 @@ const ThoughtSchema = new Schema(
 );
 
 ThoughtSchema.virtual("reactionCount").get(function () {
-  return this.reactions;
+  return this.reactions.length;
 });
 
 const Thought = model("Thought", ThoughtSchema);

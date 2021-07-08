@@ -1,13 +1,12 @@
 const { Schema, model } = require("mongoose");
-const dateFormat = require("../utils/dateFormat");
 const validator = require("validator");
 
 const UserSchema = new Schema(
   {
     username: {
       type: String,
-      unique: true,
       required: true,
+      unique: true,
       trim: true,
     },
     email: {
@@ -34,7 +33,6 @@ const UserSchema = new Schema(
       virtuals: true,
       getters: true,
     },
-    // prevents virtuals from creating duplicate of _id as `id`
     id: false,
   }
 );
